@@ -90,7 +90,7 @@ public class Server {
 			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
 			}
-			int qextras = SL.getQueueLength()
+			int qextras = SL.getQueueLength();
 			while (qextras > 2) {
 				SL.dropHead();
 				qextras -= 1;
