@@ -100,8 +100,8 @@ public class Server {
 		int temp = 9;
 		//designated master node, started required # of VM;s
 		if (id == 1) {
-			for (int i = 0; i < temp; i ++) {
-			//for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
+			//or (int i = 0; i < temp; i ++) {
+			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
 			}
 			int qextras = SL.getQueueLength();
