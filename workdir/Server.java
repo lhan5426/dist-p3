@@ -44,9 +44,9 @@ public class Server {
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
 		// convert strings
-		public int ipaddy;
-		public int port;
-		public int id;
+		int ipaddy;
+		int port;
+		int id;
 		try {
 			ipaddy = Integer.parseInt(args[0]);
 			port = Integer.parseInt(args[1]);
