@@ -60,7 +60,7 @@ public class Server {
 		int id = -1;
 		try {
 			port = Integer.parseInt(args[1]);
-			//id = Integer.parseInt(args[2]);
+			id = Integer.parseInt(args[2]);
 		} catch (NumberFormatException e) {
 			/*
 			logger.info(timestamp_log("IP address: " + args[0]));
@@ -70,10 +70,12 @@ public class Server {
 			e.printStackTrace();
 		}
 
-		logger.info(timestamp_log("IP: " + args[0]));
-		logger.info(timestamp_log("Port: " + args[1]));
-		logger.info(timestamp_log("ID: " + args[2]));
+		logger.info("IP: " + args[0]);
+		logger.info("Port: " + args[1]);
+		logger.info("ID: " + args[2]);
 
+		logger.info("Stored Port: " + String.valueOf(port));
+		logger.info("ID: " + String.valueOf(id));
 		ServerLib SL = new ServerLib( args[0], port );
 
 		//database VM - not sure if anything is needed here
