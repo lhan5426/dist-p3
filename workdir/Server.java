@@ -11,7 +11,7 @@ public class Server {
 
 	private final static Logger logger = Logger.getLogger(logname);
 
-	public String timestamp_log(String s) throws Exception {
+	public static String timestamp_log(String s) throws Exception {
 		try {
 			Instant instant = Instant.now();
 			long timestampMilli = instant.toEpochMilli();
