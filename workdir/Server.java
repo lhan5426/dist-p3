@@ -24,7 +24,7 @@ public class Server {
 
 			// exp has 3 5 for 22, may want to bump up to 11
 			// last one is 2 2 for normal
-		11,10,11,10
+		15,11,11,10
 	};
 
 	public static String timestamp_log(String s) throws Exception {
