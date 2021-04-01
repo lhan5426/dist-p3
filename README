@@ -17,3 +17,8 @@ lib/db1.txt, and start simulating clients arriving at a constant rate every
 See the handout pdf for more details.
 
 CLASSPATH=/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/sample:/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/lib
+
+Tests:
+
+java Cloud 15027 ../lib/db1.txt u-1000-3000-69420 0 60
+java Cloud 15027 ../lib/db1.txt u-100-2000-69420 0

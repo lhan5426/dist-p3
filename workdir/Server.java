@@ -9,6 +9,12 @@ import java.time.Instant;
 
 public class Server {
 
+	public static HashMap<Int, Int> hardcoded;
+	static {
+		hardcoded = new HashMap<>();
+		hardcoded.put(0, 1800)
+	}
+
 	public static String timestamp_log(String s) throws Exception {
 		try {
 			Instant instant = Instant.now();
@@ -59,11 +65,14 @@ public class Server {
 		}
 
 		ServerLib SL = new ServerLib( args[0], port );
+		SL.getTime();
 		
 		// register with load balancer so requests are sent to this server
 		SL.register_frontend();
 		// how do i know how many to start?
-		int newid = SL.startVM();
+		for (int i = 0; i < 30; i++) {
+			int newid = SL.startVM();
+		}
 
 		// main loop
 		while (true) {
