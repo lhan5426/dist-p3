@@ -4,17 +4,13 @@ import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 import java.time.Instant;
-import java.util.HashMap;
+
 
 /* Sample code for basic Server */
 
 public class Server {
 
-	public static HashMap<int, int> hardcoded;
-	static {
-		hardcoded = new HashMap<>();
-		hardcoded.put(0, 1800);
-	}
+	public static int[] hardcoded = new int[]{1800};
 
 	public static String timestamp_log(String s) throws Exception {
 		try {
