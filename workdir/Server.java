@@ -14,7 +14,7 @@ public class Server {
 		3,3,3,3,
 		3,3,7,8,
 		7,7,7,7,
-		15,15,7,7,
+		10,10,7,7,
 		7,10,10,10,
 		10,10,10,10,10
 	};
@@ -86,7 +86,7 @@ public class Server {
 		}
 
 		//designated master node, started required # of VM;s
-		if (id == 1) {
+		if (id > 1) {
 			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
 			}
