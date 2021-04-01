@@ -9,10 +9,10 @@ import java.time.Instant;
 
 public class Server {
 
-	public static String timestamp_log(String s) {
+	public String timestamp_log(String s) {
 		Instant instant = Instant.now();
 		long timestampMilli = instant.toEpochMilli();
-		return s + "\t" + String.valueOf(timestampMilli) + "\n";
+		return (s + "\t" + String.valueOf(timestampMilli) + "\n");
 	}
 
 	public static void main ( String args[] ) throws Exception {
