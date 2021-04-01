@@ -21,8 +21,8 @@ public class Server {
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
-		Logger logger = Logger.getLogger(logname);
 		String logname = String.join("-", args);
+		Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
 
 		try {
