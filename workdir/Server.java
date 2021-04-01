@@ -25,6 +25,7 @@ public class Server {
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
+		/*
 		String logname = String.join("-", args);
 		Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
@@ -43,6 +44,7 @@ public class Server {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		 */
 
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
@@ -55,9 +57,11 @@ public class Server {
 			port = Integer.parseInt(args[1]);
 			id = Integer.parseInt(args[2]);
 		} catch (NumberFormatException e) {
+			/*
 			logger.info(timestamp_log("IP address: " + args[0]));
 			logger.info(timestamp_log("Port: " + args[1]));
 			logger.info(timestamp_log("ID: " + args[2]));
+			 */
 			e.printStackTrace();
 		}
 
@@ -69,7 +73,7 @@ public class Server {
 		// how do i know how many to start?
 		for (int i = 0; i < 30; i++) {
 			int newid = SL.startVM();
-			SL.doFrontEndWork(newid);
+			//SL.doFrontEndWork(newid);
 			Cloud.FrontEndOps.Request r = SL.getNextRequest();
 			SL.processRequest(r);
 		}
