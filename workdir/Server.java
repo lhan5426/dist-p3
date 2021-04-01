@@ -77,13 +77,17 @@ public class Server {
 			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
 			}
+			Sl.endVM(1);
 		}
 
 		// odd VM -  we will use as front tier server + middle combined for now
 		if (id > 1) {
-			SL.register_frontend();
-			Cloud.FrontEndOps.Request r = SL.getNextRequest();
-			SL.processRequest(r);
+			while (true) {
+				SL.register_frontend();
+				Cloud.FrontEndOps.Request r = SL.getNextRequest();
+				SL.unregister_frontend();
+				SL.processRequest(r);
+			}
 		}
 
 		/*
