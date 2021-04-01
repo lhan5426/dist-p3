@@ -97,7 +97,7 @@ public class Server {
 
 		}
 		int booted = 1;
-		int temp = 4;
+		int temp = 5;
 		//designated master node, started required # of VM;s
 		if (id == 1) {
 			for (int i = 0; i < temp; i ++) {
