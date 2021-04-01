@@ -66,7 +66,6 @@ public class Server {
 		}
 
 		ServerLib SL = new ServerLib( args[0], port );
-		SL.getTime();
 
 		//database VM - not sure if anything is needed here
 		if (id == 0) {
@@ -75,7 +74,7 @@ public class Server {
 
 		//designated master node, started required # of VM;s
 		if (id == 1) {
-			for (int i = 0; i < hardcoded[SL.getTime]; i ++) {
+			for (int i = 0; i < hardcoded[SL.getTime()]; i ++) {
 				SL.startVM();
 			}
 		}
