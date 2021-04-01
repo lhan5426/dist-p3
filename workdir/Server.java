@@ -62,7 +62,7 @@ public class Server {
 		// register with load balancer so requests are sent to this server
 		SL.register_frontend();
 		// how do i know how many to start?
-		int newid = Sl.startVM();
+		int newid = SL.startVM();
 
 		// main loop
 		while (true) {
