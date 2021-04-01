@@ -4,12 +4,13 @@ import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 import java.time.Instant;
+import java.util.HashMap;
 
 /* Sample code for basic Server */
 
 public class Server {
 
-	public static HashMap<Int, Int> hardcoded;
+	public static HashMap<int, int> hardcoded;
 	static {
 		hardcoded = new HashMap<>();
 		hardcoded.put(0, 1800);
