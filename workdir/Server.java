@@ -16,7 +16,7 @@ public class Server {
 		10,10,10,10,
 		10,10,10,7,
 			// 10 may be okay for hour 19
-		10,10,10,13,
+		10,10,10,14,
 			//try 10 to see if less timeouts
 			// 13 12 10 10 originally
 			// 1: failed 5 timeout 1 - 11 orig
@@ -24,7 +24,7 @@ public class Server {
 
 			// exp has 3 5 for 22, may want to bump up to 11
 			// last one is 2 2 for normal
-		10,10,11,10
+		13,10,11,10
 	};
 
 	public static String timestamp_log(String s) throws Exception {
