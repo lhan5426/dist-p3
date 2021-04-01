@@ -10,7 +10,7 @@ import java.time.Instant;
 
 public class Server {
 
-	public static int[] hardcoded = new int[]{10};
+	public static int[] hardcoded = new int[]{30};
 
 	public static String timestamp_log(String s) throws Exception {
 		try {
@@ -25,11 +25,11 @@ public class Server {
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
-
+/*
 		String logname = String.join("-", args);
 		Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
-/*
+
 		try {
 			// This block configure the logger with handler and formatter
 			fh = new FileHandler("/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/workdir/logs/" + logname);
@@ -46,12 +46,6 @@ public class Server {
 		}
 
  */
-		fh = new FileHandler("/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/workdir/logs/" + logname);
-		logger.addHandler(fh);
-		SimpleFormatter formatter = new SimpleFormatter();
-		fh.setFormatter(formatter);
-
-		logger.info("----------------Init logs---------------\n");
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
 		// convert strings
@@ -69,15 +63,16 @@ public class Server {
 			 */
 			e.printStackTrace();
 		}
-
+/*
 		logger.info("IP: " + args[0]);
 		logger.info("Port: " + args[1]);
 		logger.info("ID: " + args[2]);
 
 		logger.info("Stored Port: " + String.valueOf(port));
 		logger.info("ID: " + String.valueOf(id));
-		ServerLib SL = new ServerLib( args[0], port );
 
+		ServerLib SL = new ServerLib( args[0], port );
+*/
 		//database VM - not sure if anything is needed here
 		if (id == 0) {
 
