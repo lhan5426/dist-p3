@@ -69,13 +69,18 @@ public class Server {
 		// how do i know how many to start?
 		for (int i = 0; i < 30; i++) {
 			int newid = SL.startVM();
+			SL.doFrontEndWork(newid);
+			Cloud.FrontEndOps.Request r = SL.getNextRequest();
+			SL.processRequest(r);
 		}
 
 		// main loop
+		/*
 		while (true) {
 			Cloud.FrontEndOps.Request r = SL.getNextRequest();
-			SL.processRequest( r );
+			SL.processRequest(r);
 		}
+		*/
 	}
 }
 
