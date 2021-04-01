@@ -10,7 +10,7 @@ import java.time.Instant;
 
 public class Server {
 
-	public static int[] hardcoded = new int[]{30};
+	public static int[] hardcoded = new int[]{15};
 
 	public static String timestamp_log(String s) throws Exception {
 		try {
@@ -83,6 +83,7 @@ public class Server {
 			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
 			}
+			SL.endVM(1);
 		}
 
 		// odd VM -  we will use as front tier server + middle combined for now
