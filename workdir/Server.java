@@ -14,9 +14,10 @@ public class Server {
 		3,3,3,3,
 		3,3,7,8,
 		10,10,10,10,
-		12,10,10,7,
-		10,10,10,10,
-		10,10,10,10,10
+		10,10,10,7,
+			// 10 may be okay for hour 19
+		10,10,10,12,
+		13,10,10,10,10
 	};
 
 	public static String timestamp_log(String s) throws Exception {
