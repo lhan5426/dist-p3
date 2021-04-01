@@ -17,6 +17,7 @@ public class Server {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return "Failed to convert";
 	}
 
 	public static void main ( String args[] ) throws Exception {
@@ -43,9 +44,9 @@ public class Server {
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
 		// convert strings
-		int ipaddy;
-		int port;
-		int id;
+		int ipaddy = -1;
+		int port = -1;
+		int id = -1;
 		try {
 			ipaddy = Integer.parseInt(args[0]);
 			port = Integer.parseInt(args[1]);
