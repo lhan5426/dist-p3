@@ -73,14 +73,16 @@ public class Server {
 
 		}
 
-		// odd VM -  we will use as front tier server
-		if (id % 2 != 0) {
-			SL.register_frontend();
-			SL.startVM();
+		//designated master node, started required # of VM;s
+		if (id == 1) {
+			for (int i = 0; i < hardcoded[SL.getTime]; i ++) {
+				SL.startVM();
+			}
 		}
 
-		// even VM - we will use as middle tier
-		if (id % 2 != 0 && id != 0) {
+		// odd VM -  we will use as front tier server + middle combined for now
+		if (id > 1) {
+			SL.register_frontend();
 			Cloud.FrontEndOps.Request r = SL.getNextRequest();
 			SL.processRequest(r);
 		}
