@@ -67,7 +67,25 @@ public class Server {
 
 		ServerLib SL = new ServerLib( args[0], port );
 		SL.getTime();
-		
+
+		//database VM - not sure if anything is needed here
+		if (id == 0) {
+
+		}
+
+		// odd VM -  we will use as front tier server
+		if (id % 2 != 0) {
+			SL.register_frontend();
+			SL.startVM();
+		}
+
+		// even VM - we will use as middle tier
+		if (id % 2 != 0 && id != 0) {
+			Cloud.FrontEndOps.Request r = SL.getNextRequest();
+			SL.processRequest(r);
+		}
+
+		/*
 		// register with load balancer so requests are sent to this server
 		SL.register_frontend();
 		// how do i know how many to start?
@@ -77,6 +95,8 @@ public class Server {
 			Cloud.FrontEndOps.Request r = SL.getNextRequest();
 			SL.processRequest(r);
 		}
+
+		 */
 
 		// main loop
 		/*
