@@ -78,8 +78,8 @@ public class Server {
 */		int num_inst = 2;
 		ServerLib SL = new ServerLib( args[0], port );
 
-		logger.info("val: " + Integer.parseInt(hardcoded[(int) SL.getTime()]));
-		logger.info("ind: " + Integer.parseInt((int) SL.getTime()));
+		logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
+		logger.info("ind: " + String.valueOf((int) SL.getTime()));
 
 		//database VM - not sure if anything is needed here
 		if (id == 0) {
