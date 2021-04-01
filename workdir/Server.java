@@ -86,14 +86,14 @@ public class Server {
 		}
 
 		// odd VM -  we will use as front tier server + middle combined for now
-		if (id != 1) {
-			while (true) {
-				SL.register_frontend();
-				Cloud.FrontEndOps.Request r = SL.getNextRequest();
-				SL.unregister_frontend();
-				SL.processRequest(r);
-			}
+
+		while (true) {
+			SL.register_frontend();
+			Cloud.FrontEndOps.Request r = SL.getNextRequest();
+			SL.unregister_frontend();
+			SL.processRequest(r);
 		}
+
 
 		/*
 		// register with load balancer so requests are sent to this server
