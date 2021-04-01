@@ -10,7 +10,7 @@ import java.time.Instant;
 
 public class Server {
 
-	public static int[] hardcoded = new int[]{1800};
+	public static int[] hardcoded = new int[]{30};
 
 	public static String timestamp_log(String s) throws Exception {
 		try {
@@ -25,7 +25,7 @@ public class Server {
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
-		/*
+
 		String logname = String.join("-", args);
 		Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
@@ -44,7 +44,6 @@ public class Server {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		 */
 
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
@@ -65,6 +64,8 @@ public class Server {
 			e.printStackTrace();
 		}
 
+		logger.info(timestamp_log("ID: " + args[2]));
+
 		ServerLib SL = new ServerLib( args[0], port );
 
 		//database VM - not sure if anything is needed here
@@ -77,7 +78,6 @@ public class Server {
 			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
 			}
-			SL.endVM(1);
 		}
 
 		// odd VM -  we will use as front tier server + middle combined for now
