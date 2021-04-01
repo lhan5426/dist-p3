@@ -76,26 +76,26 @@ public class Server {
 		ServerLib SL = new ServerLib( args[0], port );
 
 		//database VM - not sure if anything is needed here
-		if (id == 0) {
-
-		}
-
-		//designated master node, started required # of VM;s
-		if (id == 1) {
-			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
-				SL.startVM();
-			}
-		}
-
-		// odd VM -  we will use as front tier server + middle combined for now
-		if (id > 1) {
-			while (true) {
-				SL.register_frontend();
-				Cloud.FrontEndOps.Request r = SL.getNextRequest();
-				SL.unregister_frontend();
-				SL.processRequest(r);
-			}
-		}
+//		if (id == 0) {
+//
+//		}
+//
+//		//designated master node, started required # of VM;s
+//		if (id == 1) {
+//			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
+//				SL.startVM();
+//			}
+//		}
+//
+//		// odd VM -  we will use as front tier server + middle combined for now
+//		if (id > 1) {
+//			while (true) {
+//				SL.register_frontend();
+//				Cloud.FrontEndOps.Request r = SL.getNextRequest();
+//				SL.unregister_frontend();
+//				SL.processRequest(r);
+//			}
+//		}
 
 		/*
 		// register with load balancer so requests are sent to this server
