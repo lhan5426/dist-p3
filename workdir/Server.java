@@ -11,8 +11,8 @@ import java.time.Instant;
 public class Server {
 
 	public static int[] hardcoded = new int[]{
-		10,10,10,10,
-		10,10,10,10,
+		8,8,8,8,
+		8,10,10,10,
 		10,10,10,10,
 		10,10,10,10,
 		10,10,10,10,
