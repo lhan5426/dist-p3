@@ -9,16 +9,20 @@ import java.time.Instant;
 
 public class Server {
 
-	public String timestamp_log(String s) {
-		Instant instant = Instant.now();
-		long timestampMilli = instant.toEpochMilli();
-		return (s + "\t" + String.valueOf(timestampMilli) + "\n");
+	public String timestamp_log(String s) throws Exception {
+		try {
+			Instant instant = Instant.now();
+			long timestampMilli = instant.toEpochMilli();
+			return (s + "\t" + String.valueOf(timestampMilli) + "\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
 		String logname = String.join("-", args);
-		private static Logger logger = Logger.getLogger(logname);
+		private final static Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
 
 		try {
