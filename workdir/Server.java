@@ -32,7 +32,6 @@ public class Server {
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
-/*
 		String logname = String.join("-", args);
 		Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
@@ -52,7 +51,6 @@ public class Server {
 			e.printStackTrace();
 		}
 
- */
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
 		// convert strings
@@ -79,6 +77,9 @@ public class Server {
 		logger.info("ID: " + String.valueOf(id));
 */		int num_inst = 2;
 		ServerLib SL = new ServerLib( args[0], port );
+
+		logger.info("val: " + Integer.parseInt(hardcoded[(int) SL.getTime()]));
+		logger.info("ind: " + Integer.parseInt((int) SL.getTime());
 
 		//database VM - not sure if anything is needed here
 		if (id == 0) {
