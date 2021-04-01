@@ -70,9 +70,9 @@ public class Server {
 
 		logger.info("Stored Port: " + String.valueOf(port));
 		logger.info("ID: " + String.valueOf(id));
-
-		ServerLib SL = new ServerLib( args[0], port );
 */
+		ServerLib SL = new ServerLib( args[0], port );
+
 		//database VM - not sure if anything is needed here
 		if (id == 0) {
 
