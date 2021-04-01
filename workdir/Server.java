@@ -17,7 +17,11 @@ public class Server {
 		10,10,10,7,
 			// 10 may be okay for hour 19
 		10,10,10,13,
-		13,12,10,10
+			//try 10 to see if less timeouts
+			// 13 12 10 10 originally
+			// exp has 3 5 for 23, may want to bump up to 11
+			// last one is 2 2 for normal
+		11,12,11,11
 	};
 
 	public static String timestamp_log(String s) throws Exception {
