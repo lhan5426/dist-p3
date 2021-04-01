@@ -10,7 +10,7 @@ import java.time.Instant;
 
 public class Server {
 
-	public static int[] hardcoded = new int[]{14};
+	public static int[] hardcoded = new int[]{15};
 
 	public static String timestamp_log(String s) throws Exception {
 		try {
@@ -90,9 +90,7 @@ public class Server {
 			SL.register_frontend();
 			Cloud.FrontEndOps.Request r = SL.getNextRequest();
 			SL.unregister_frontend();
-			while (SL.getQueueLength() != 0) {
-				SL.processRequest(r);
-			}
+			SL.processRequest(r);
 		}
 
 		/*
