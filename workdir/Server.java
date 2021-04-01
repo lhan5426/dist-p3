@@ -32,7 +32,7 @@ public class Server {
 
 		try {
 			// This block configure the logger with handler and formatter
-			fh = new FileHandler("/logs/" + logname);
+			fh = new FileHandler("/logs/" + logname, 8096, 1, true);
 			logger.addHandler(fh);
 			SimpleFormatter formatter = new SimpleFormatter();
 			fh.setFormatter(formatter);
