@@ -13,7 +13,7 @@ public class Server {
 	public static int[] hardcoded = new int[]{
 		3,3,3,3,
 		3,3,7,8,
-		15,15,15,15,
+		10,10,10,10,
 		10,10,12,7,
 		7,10,10,10,
 		10,10,10,10,10
@@ -77,18 +77,23 @@ public class Server {
 
 		logger.info("Stored Port: " + String.valueOf(port));
 		logger.info("ID: " + String.valueOf(id));
-*/
+*/		int num_inst = 2;
 		ServerLib SL = new ServerLib( args[0], port );
 
 		//database VM - not sure if anything is needed here
 		if (id == 0) {
 
 		}
-
+		int booted = 1;
 		//designated master node, started required # of VM;s
 		if (id > 1) {
 			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
+			}
+			int qextras = SL.getQueueLength()
+			while (qextras > 2) {
+				SL.dropHead();
+				qextras -= 1;
 			}
 		}
 
