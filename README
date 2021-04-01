@@ -25,10 +25,22 @@ java Cloud 15027 ../lib/db1.txt u-1000-3000-69420 0 60
 java Cloud 15027 ../lib/db1.txt u-1000-3000-1 0 60
 java Cloud 15027 ../lib/db1.txt e-2000-69420 0 60
 
-java Cloud 15027 ../lib/db1.txt u-1750-3000-69420 0 60
-java Cloud 15027 ../lib/db1.txt e-2200-69420 0 60
+java Cloud 15027 ../lib/db1.txt u-1750-3000-69420 1 60
+java Cloud 15027 ../lib/db1.txt e-2200-69420 1 60
 
-java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 0 60
-java Cloud 15027 ../lib/db1.txt e-10000-69420 1 60
+java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 2 60
+java Cloud 15027 ../lib/db1.txt e-10000-69420 2 60
+
+java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 3 60
+java Cloud 15027 ../lib/db1.txt e-10000-69420 3 60
+
+java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 4 60
+java Cloud 15027 ../lib/db1.txt e-10000-69420 4 60
+
+java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 5 60
+java Cloud 15027 ../lib/db1.txt e-10000-69420 5 60
+
+java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 6 60
+java Cloud 15027 ../lib/db1.txt e-10000-69420 6 60
 
 java Cloud 15027 ../lib/db1.txt c-1000-1 12
