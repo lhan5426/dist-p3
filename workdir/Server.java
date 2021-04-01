@@ -86,11 +86,13 @@ public class Server {
 		}
 
 		// odd VM -  we will use as front tier server + middle combined for now
-		while (true) {
-			SL.register_frontend();
-			Cloud.FrontEndOps.Request r = SL.getNextRequest();
-			SL.unregister_frontend();
-			SL.processRequest(r);
+		if (id != 1) {
+			while (true) {
+				SL.register_frontend();
+				Cloud.FrontEndOps.Request r = SL.getNextRequest();
+				SL.unregister_frontend();
+				SL.processRequest(r);
+			}
 		}
 
 		/*
