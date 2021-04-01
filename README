@@ -84,3 +84,12 @@ java Cloud 15027 ../lib/db1.txt e-750-69420 19
 
 java Cloud 15027 ../lib/db1.txt u-600-730-69420 20
 java Cloud 15027 ../lib/db1.txt e-666-69420 20
+
+java Cloud 15027 ../lib/db1.txt u-666-730-69420 21
+java Cloud 15027 ../lib/db1.txt e-700-69420 21
+
+java Cloud 15027 ../lib/db1.txt u-900-1100-69420 22
+java Cloud 15027 ../lib/db1.txt e-1000-69420 22
+
+java Cloud 15027 ../lib/db1.txt u-1000-1500-69420 23 60
+java Cloud 15027 ../lib/db1.txt e-1250-69420 23 60

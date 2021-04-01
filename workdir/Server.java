@@ -16,8 +16,8 @@ public class Server {
 		10,10,10,10,
 		10,10,10,7,
 			// 10 may be okay for hour 19
-		10,10,10,12,
-		13,10,10,10,10
+		10,10,10,13,
+		13,13,10,10
 	};
 
 	public static String timestamp_log(String s) throws Exception {
