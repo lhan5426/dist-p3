@@ -32,6 +32,7 @@ public class Server {
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
+		/*
 		String logname = String.join("-", args);
 		Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
@@ -50,6 +51,8 @@ public class Server {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		 */
 
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
@@ -78,8 +81,8 @@ public class Server {
 */		int num_inst = 2;
 		ServerLib SL = new ServerLib( args[0], port );
 
-		logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
-		logger.info("ind: " + String.valueOf((int) SL.getTime()));
+		//logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
+		//logger.info("ind: " + String.valueOf((int) SL.getTime()));
 
 		//database VM - not sure if anything is needed here
 		if (id == 0) {
@@ -87,7 +90,7 @@ public class Server {
 		}
 		int booted = 1;
 		//designated master node, started required # of VM;s
-		if (id > 1) {
+		if (id == 1) {
 			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
 			}
