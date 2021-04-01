@@ -12,11 +12,11 @@ public class Server {
 
 	public static int[] hardcoded = new int[]{
 		3,3,3,3,
-		3,3,3,8,
-		8,10,10,10,
+		3,3,2,8,
+		4,10,10,10,
 		10,10,10,7,
 			// 10 may be okay for hour 19
-		10,10,10,10,
+		10,10,10,5,
 			//try 10 to see if less timeouts
 			// 13 12 10 10 originally
 			// 1: failed 5 timeout 1 - 11 orig
