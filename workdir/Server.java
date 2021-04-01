@@ -36,6 +36,8 @@ public class Server {
 			e.printStackTrace();
 		}
 
+
+		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
 		// convert strings
 		public int ipaddy;
 		public int port;
@@ -51,13 +53,12 @@ public class Server {
 			e.printStackTrace();
 		}
 
-
-		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
 		ServerLib SL = new ServerLib( args[0], port );
-		Sl.startVM();
 		
 		// register with load balancer so requests are sent to this server
 		SL.register_frontend();
+		// how do i know how many to start?
+		int newid = Sl.startVM();
 
 		// main loop
 		while (true) {

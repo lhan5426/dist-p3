@@ -11,8 +11,9 @@ To run the sample, try:
 	java Cloud 15440 lib/db1.txt c-2000-1 12
 This will launch the "Cloud" service, load the database with the items in 
 lib/db1.txt, and start simulating clients arriving at a constant rate every
-2000 ms.  A single instance of the sample Server will b erun as a "VM" 
+2000 ms.  A single instance of the sample Server will be run as a "VM"
 (actually a separate process).
 
 See the handout pdf for more details.
 
+CLASSPATH=/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/sample:/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/lib
