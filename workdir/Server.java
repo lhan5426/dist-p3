@@ -12,7 +12,7 @@ public class Server {
 	public static HashMap<Int, Int> hardcoded;
 	static {
 		hardcoded = new HashMap<>();
-		hardcoded.put(0, 1800)
+		hardcoded.put(0, 1800);
 	}
 
 	public static String timestamp_log(String s) throws Exception {
