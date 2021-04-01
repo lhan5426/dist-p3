@@ -9,6 +9,8 @@ import java.time.Instant;
 
 public class Server {
 
+	private final static Logger logger = Logger.getLogger(logname);
+
 	public String timestamp_log(String s) throws Exception {
 		try {
 			Instant instant = Instant.now();
@@ -22,7 +24,6 @@ public class Server {
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
 		String logname = String.join("-", args);
-		private final static Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
 
 		try {
