@@ -12,7 +12,7 @@ To run the sample, try:
 This will launch the "Cloud" service, load the database with the items in 
 lib/db1.txt, and start simulating clients arriving at a constant rate every
 2000 ms.  A single instance of the sample Server will b erun as a "VM" 
-(actually a spearate process).  
+(actually a separate process).
 
 See the handout pdf for more details.
 
