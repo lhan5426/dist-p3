@@ -59,9 +59,8 @@ public class Server {
 		int port = -1;
 		int id = -1;
 		try {
-			ipaddy = Integer.parseInt(args[0]);
 			port = Integer.parseInt(args[1]);
-			id = Integer.parseInt(args[2]);
+			//id = Integer.parseInt(args[2]);
 		} catch (NumberFormatException e) {
 			/*
 			logger.info(timestamp_log("IP address: " + args[0]));
@@ -71,6 +70,8 @@ public class Server {
 			e.printStackTrace();
 		}
 
+		logger.info(timestamp_log("IP: " + args[0]));
+		logger.info(timestamp_log("Port: " + args[1]));
 		logger.info(timestamp_log("ID: " + args[2]));
 
 		ServerLib SL = new ServerLib( args[0], port );
