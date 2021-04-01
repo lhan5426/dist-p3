@@ -23,7 +23,7 @@ public class Server {
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
-		String logname = String.join("-", args);
+		public static String logname = String.join("-", args);
 		FileHandler fh;
 
 		try {
