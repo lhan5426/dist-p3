@@ -77,7 +77,7 @@ public class Server {
 			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
 				SL.startVM();
 			}
-			Sl.endVM(1);
+			SL.endVM(1);
 		}
 
 		// odd VM -  we will use as front tier server + middle combined for now
