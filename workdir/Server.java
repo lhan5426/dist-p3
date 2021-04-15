@@ -17,7 +17,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class Server {
 
-	private static AppOps from_front = null;
+	private static AppOps from_front;
 
 	public static int[] hardcoded = new int[]{
 		3,2,2,2,
@@ -203,6 +203,9 @@ public class Server {
 			// the size of Q needs to be fine tuned probably
 			// TODO args[0] to ipaddy (may need to render args[0] a string)
 			// TODO error handling for this casting
+			// TODO RNSDNFOSDNF
+			//  : i think you need to wait until some signal is sent from app server indicating it's up
+			// this also needs to be outside the class and is prolly some serializable
 			try {
 				from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
 			} catch (Exception e) {
@@ -258,6 +261,7 @@ public class Server {
 
 	//Interface for function provided to frontend to access backend
 	public interface AppOps extends Remote {
+
 		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
 //		int getLength() throws RemoteException;
 //		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
