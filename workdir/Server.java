@@ -136,7 +136,7 @@ public class Server {
 		int upscale_thres = 0;
 		int downscale_thres = 0;
 		// right now rolling avg is last 5 interarrival times
-		ArrayBlockingQueue<Float> last_times = new ArrayBlockingQueue<Float>(5);
+		//ArrayBlockingQueue<Float> last_times = new ArrayBlockingQueue<Float>(5);
 		int endind = 0;
 		// total includes master node so technically should never be below 1
 		int curr_total = hardcoded[(int) SL.getTime()];
@@ -182,7 +182,7 @@ public class Server {
 		//this server is not keeping up
 		//bool qlong = false;
 
-		int num_front = ((int) Math.floor(hardcoded[(int) SL.getTime()]/2))+1;
+		int num_front = 1; //((int) Math.floor(hardcoded[(int) SL.getTime()]/2))+1;
 
 		//front end designated
 		if (id > 1 && id < num_front+1) {
