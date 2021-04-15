@@ -49,13 +49,11 @@ public class Server {
 			14,11,11,10
 	};
 
-	private static class AppOpsImpl extends UnicastRemoteObject implements Server.AppOps {
+	private static class AppOpsImpl extends UnicastRemoteObject implements AppOps {
 		private ArrayBlockingQueue<Cloud.FrontEndOps.Request> jobs = new ArrayBlockingQueue<Cloud.FrontEndOps.Request>(5);
 
 		public AppOpsImpl() throws RemoteException {
 			super(0);
-		} catch (RemoteException e) {
-			e.printStackTrace();
 		}
 
 		public boolean queueRequest(Cloud.FrontEndOps.Request var1) {
