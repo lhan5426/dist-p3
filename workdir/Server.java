@@ -216,7 +216,7 @@ public class Server {
 						//somehow do some RMI shit and send
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			}
 		//app server
