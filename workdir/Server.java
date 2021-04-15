@@ -221,7 +221,7 @@ public class Server {
 						// if job is taking a long time and this put never happens
 						// may need some form of timing benchmark to decide when to drop job
 						from_front.queueRequest(r);
-						Cloud.FrontEndOps.Request r0 = to_mid.getHead();
+						Cloud.FrontEndOps.Request r0 = from_front.getHead();
 						if (r0 != null) {
 							logger.info(timestamp_log("From frontend pov, correctly stored req" + r0.toString() + "\n"));
 						}
