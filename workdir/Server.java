@@ -104,7 +104,7 @@ public class Server {
 		int upscale_thres = 0;
 		int downscale_thres = 0;
 		// right now rolling avg is last 5 interarrival times
-		ArrayBlockingQueue<Float> last_times = new ArrayBlockingQueue<Float>();
+		ArrayBlockingQueue<Float> last_times = new ArrayBlockingQueue<Float>(5);
 		int endind = 0;
 		// total includes master node so technically should never be below 1
 		int curr_total = hardcoded[(int) SL.getTime()];
@@ -186,14 +186,6 @@ public class Server {
 		}
 
 		 */
-
-		// main loop
-		/*
-		while (true) {
-			Cloud.FrontEndOps.Request r = SL.getNextRequest();
-			SL.processRequest(r);
-		}
-		*/
 	}
 }
 
