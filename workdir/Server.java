@@ -208,7 +208,7 @@ public class Server {
 			//Each backend needs to create its own threadsafe queue in addition to others
 			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
-			AppQueue to_mid = new AppQueue;
+			AppQueue to_mid = new Server.AppQueue();
 			Naming.rebind("//localhost:" + port + "/Cloud", to_mid);
 
 			while (true) {
