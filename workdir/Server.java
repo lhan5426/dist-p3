@@ -36,7 +36,7 @@ public class Server {
 
 	//Interface for function provided to frontend to access backend
 	public interface AppOps extends Remote {
-//		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
+		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
 //		int getLength() throws RemoteException;
 //		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
 	}
@@ -124,14 +124,14 @@ public class Server {
 			 */
 			e.printStackTrace();
 		}
-/*
+
 		logger.info("IP: " + args[0]);
 		logger.info("Port: " + args[1]);
 		logger.info("ID: " + args[2]);
 
 		logger.info("Stored Port: " + String.valueOf(port));
 		logger.info("ID: " + String.valueOf(id));
-*/
+
 		ServerLib SL = new ServerLib( args[0], port );
 		int upscale_thres = 0;
 		int downscale_thres = 0;
@@ -163,7 +163,7 @@ public class Server {
 			// While other VM's boot, we handle initial queued requests in master node
 			// Cannot stay in req handling mode longer than 10 seconds according to Piazza
 			// ALthough there is a big penalty for switching - ideally immediately
-			while (SL.getTime() < 10) {
+			while (true) {
 				SL.register_frontend();
 				Cloud.FrontEndOps.Request r = SL.getNextRequest();
 				//last_times.add(SL.getTime());
@@ -188,9 +188,13 @@ public class Server {
 		//front end designated
 		if (id > 1 && id < num_front+1) {
 			// the size of Q needs to be fine tuned probably
-			// TODO figure out what args[0] is and change it to less magic
+			// TODO args[0] to ipaddy (may need to render args[0] a string)
 			// TODO error handling for this casting
-			AppQueue from_front = (AppQueue) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+			try {
+				AppOps from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			SL.register_frontend();
 			while (true) {
 				Cloud.FrontEndOps.Request r = SL.getNextRequest();
