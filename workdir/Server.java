@@ -56,17 +56,17 @@ public class Server {
 			super(0);
 		}
 
-		public boolean queueRequest(Cloud.FrontEndOps.Request var1) {
-			//this.notifyAll();
+		public synchronized boolean queueRequest(Cloud.FrontEndOps.Request var1) {
+			this.notifyAll();
 			this.jobs.add(var1);
 			return true;
 		}
 
-		public int getLength() {
+		public synchronized int getLength() {
 			return this.jobs.size();
 		}
 
-		public Cloud.FrontEndOps.Request removeHead() {
+		public synchronized Cloud.FrontEndOps.Request removeHead() {
 			Cloud.FrontEndOps.Request r = null;
 
 			try {
@@ -261,8 +261,8 @@ public class Server {
 	public interface AppOps extends Remote {
 
 		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
-//		int getLength() throws RemoteException;
-//		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
+		int getLength() throws RemoteException;
+		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
 	}
 }
 
