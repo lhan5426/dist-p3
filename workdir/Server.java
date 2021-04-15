@@ -169,7 +169,7 @@ public class Server {
 
 				 */
 				SL.unregister_frontend();
-				SL.processRequest(r);
+				//SL.processRequest(r);
 			}
 		}
 		//TODO measure interarrival times;
