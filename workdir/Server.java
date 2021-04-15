@@ -85,7 +85,7 @@ public class Server {
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
-		/*
+
 		String logname = String.join("-", args);
 		Logger logger = Logger.getLogger(logname);
 		FileHandler fh;
@@ -105,7 +105,7 @@ public class Server {
 			e.printStackTrace();
 		}
 
-		 */
+
 
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
@@ -140,8 +140,8 @@ public class Server {
 		int endind = 0;
 		// total includes master node so technically should never be below 1
 		int curr_total = hardcoded[(int) SL.getTime()];
-		//logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
-		//logger.info("ind: " + String.valueOf((int) SL.getTime()));
+		logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
+		logger.info("ind: " + String.valueOf((int) SL.getTime()));
 
 		//designated master node, started required # of VMs
 		//can temporarily act as monolith and handle queued requests
