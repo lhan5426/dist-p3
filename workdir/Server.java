@@ -77,6 +77,18 @@ public class Server {
 			}
 			return r;
 		}
+
+		public synchronized Cloud.FrontEndOps.Request getHead() {
+			Cloud.FrontEndOps.Request r = null;
+
+			try {
+				r = (Cloud.FrontEndOps.Request)this.jobs.peek();
+			}
+			catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+			return r;
+		}
 	}
 
 	public static String timestamp_log(String s) throws Exception {
@@ -197,6 +209,7 @@ public class Server {
 		//must be at least 0 and 1 VM that are non front
 		//so this should always be safe
 		if (id > 1 && id < num_front+2) {
+			logger.info("Inside some dogshit fronted: \n");
 			// the size of Q needs to be fine tuned probably
 			// TODO args[0] to ipaddy (may need to render args[0] a string)
 			// TODO error handling for this casting
@@ -208,12 +221,14 @@ public class Server {
 					temp = (AppOps)Naming.lookup("//" + args[0] + ":" + port + "/AppOps");
 					from_front = temp;
 					SL.register_frontend();
+					logger.info("Frontend registered\n")
 					while (true) {
 						Cloud.FrontEndOps.Request r = SL.getNextRequest();
 						// if job is taking a long time and this put never happens
 						// may need some form of timing benchmark to decide when to drop job
 						from_front.queueRequest(r);
 						//somehow do some RMI shit and send
+						logger.info("Frontend should be queueing shit here\n")
 					}
 				} catch (Exception e) {
 					//e.printStackTrace();
@@ -221,6 +236,7 @@ public class Server {
 			}
 		//app server
 		} else {
+			logger.info("Inside some app server...\n");
 			//Each backend needs to create its own threadsafe queue in addition to others
 			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
@@ -228,9 +244,11 @@ public class Server {
 			Naming.rebind("//localhost:" + port + "/AppOps", to_mid);
 
 			while (true) {
+				Cloud.FrontEndOps.Request r0 = to_mid.getHead();
+				logger.info("\tcurrent req: " + r0.toString() + "\n");
 				Cloud.FrontEndOps.Request r = to_mid.removeHead();
 				SL.processRequest(r);
-				logger.info("completed req: " + r.toString());
+				logger.info("\tcompleted req: " + r.toString() + "\n");
 			}
 		}
 
@@ -263,6 +281,7 @@ public class Server {
 		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
 		int getLength() throws RemoteException;
 		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
+		Cloud.FrontEndOps.Request getHead() throws InterruptedException, RemoteException;
 	}
 }
 
