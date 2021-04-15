@@ -221,14 +221,14 @@ public class Server {
 					temp = (AppOps)Naming.lookup("//" + args[0] + ":" + port + "/AppOps");
 					from_front = temp;
 					SL.register_frontend();
-					logger.info("Frontend registered\n")
+					logger.info("Frontend registered\n");
 					while (true) {
 						Cloud.FrontEndOps.Request r = SL.getNextRequest();
 						// if job is taking a long time and this put never happens
 						// may need some form of timing benchmark to decide when to drop job
 						from_front.queueRequest(r);
 						//somehow do some RMI shit and send
-						logger.info("Frontend should be queueing shit here\n")
+						logger.info("Frontend should be queueing shit here\n");
 					}
 				} catch (Exception e) {
 					//e.printStackTrace();
