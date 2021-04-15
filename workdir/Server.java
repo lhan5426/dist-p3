@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
-//import java.time.Instant;
+import java.time.Instant;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -37,8 +37,8 @@ public class Server {
 	//Interface for function provided to frontend to access backend
 	private interface AppOps extends remote {
 		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
-		private synchronized int getLength() throws RemoteException;
-		private synchronized Request removeHead() throws InterruptedException, RemoteException;
+		private int getLength() throws RemoteException;
+		private Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
 	}
 
 	private class AppQueue extends UnicastRemoteObject implements Server.AppOps {
@@ -57,7 +57,7 @@ public class Server {
 			}
 		}
 
-		private synchronized int getLength() {
+		private int getLength() {
 			try {
 				return this.jobs.size();
 			} catch (RemoteException e) {
@@ -65,7 +65,7 @@ public class Server {
 			}
 		}
 
-		private synchronized Request removeHead() {
+		private Cloud.FrontEndOps.Request removeHead() {
 			Cloud.FrontEndOps.Request r = null;
 
 			try {
