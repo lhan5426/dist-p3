@@ -20,7 +20,7 @@ public class Server {
 	private static AppOps from_front = null;
 
 	public static int[] hardcoded = new int[]{
-		2,2,2,2,
+		3,2,2,2,
 		3,3,2,8,
 		4,10,10,10,
 		10,10,10,7,
