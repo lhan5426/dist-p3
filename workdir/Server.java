@@ -1,14 +1,17 @@
+//import java.io.Serializable;
+//import java.rmi.Remote;
+//import java.rmi.RemoteException;
+//import java.rmi.server.UnicastRemoteObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 import java.time.Instant;
+//import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
 
-
-/* Sample code for basic Server */
-
-public class Server {
+public class Server extends Remote {
 
 	public static int[] hardcoded = new int[]{
 		3,3,3,3,
@@ -37,6 +40,16 @@ public class Server {
 		}
 		return "Failed to convert";
 	}
+
+//	public int get_avg(ArrayList<Integer> times, int endind) {
+//		if (endind == 0) return times.get(0);
+//		int sum = 0;
+//		int stind = max(0, endind-4);
+//		int endind = min(times.size(), 5);
+//		for (int t = stind; t < endind; t--)
+//			sum += times.get(t);
+//		return sum/(endind-stind);
+//	}
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
@@ -86,27 +99,69 @@ public class Server {
 
 		logger.info("Stored Port: " + String.valueOf(port));
 		logger.info("ID: " + String.valueOf(id));
-*/		int num_inst = 2;
+*/
 		ServerLib SL = new ServerLib( args[0], port );
-
+		int upscale_thres = 0;
+		int downscale_thres = 0;
+		// right now rolling avg is last 5 interarrival times
+		ArrayBlockingQueue<float> last_times = new ArrayBlockingQueue<float>;
+		int endind = 0;
+		// total includes master node so technically should never be below 1
+		int curr_total = hardcoded[(int) SL.getTime()];
 		//logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
 		//logger.info("ind: " + String.valueOf((int) SL.getTime()));
 
-		//database VM - not sure if anything is needed here
-		if (id == 0) {
-
-		}
-		//designated master node, started required # of VM;s
+		//designated master node, started required # of VMs
+		//can temporarily act as monolith and handle queued requests
 		if (id == 1) {
 			//or (int i = 0; i < temp; i ++) {
-			for (int i = 0; i < hardcoded[(int) SL.getTime()]; i ++) {
+
+			for (int i = 0; i < curr_total; i ++) {
 				SL.startVM();
 			}
+
 			int qextras = SL.getQueueLength();
+			/*
 			while (qextras > 2) {
 				SL.dropHead();
 				qextras -= 1;
 			}
+
+			 */
+			// While other VM's boot, we handle initial queued requests in master node
+			// Cannot stay in req handling mode longer than 10 seconds according to Piazza
+			while (SL.getTime() < 10) {
+				SL.register_frontend();
+				Cloud.FrontEndOps.Request r = SL.getNextRequest();
+				last_times.add_ele(SL.getTime());
+				/*
+				if (get_avg(last_times, endind) > 1) {
+					SL.startVM();
+				}
+
+				 */
+				SL.unregister_frontend();
+				SL.processRequest(r);
+			}
+		}
+		//TODO measure interarrival times;
+
+		//qlength < 2 means server is keeping up, otherwise
+		//this server is not keeping up
+		//bool qlong = false;
+
+		int num_front = ((int) Math.floor(hardcoded[(int) SL.getTime()]/2))+1;
+		//front end designated
+		if (id > 1 && id < num_front+1) {
+			SL.register_frontend();
+			while (true) {
+				Cloud.FrontEndOps.Request r = SL.getNextRequest();
+				SL.queueRequest(r);
+				//somehow do some RMI shit and send
+			}
+		} else {
+			//Somehow get req from RMI
+			SL.processRequest(r);
 		}
 
 		// odd VM -  we will use as front tier server + middle combined for now
