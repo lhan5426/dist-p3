@@ -17,6 +17,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class Server {
 
+	private static AppOps from_front = null;
+
 	public static int[] hardcoded = new int[]{
 		5,3,3,3,
 		3,3,2,8,
@@ -184,7 +186,7 @@ public class Server {
 			// TODO args[0] to ipaddy (may need to render args[0] a string)
 			// TODO error handling for this casting
 			try {
-				private static AppOps from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+				from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
