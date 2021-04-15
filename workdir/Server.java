@@ -205,7 +205,7 @@ public class Server {
 			// this also needs to be outside the class and is prolly some serializable
 			while (temp == null) {
 				try {
-					temp = (Server.AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+					temp = (AppOps)Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
 					from_front = temp;
 					SL.register_frontend();
 					while (true) {
@@ -224,7 +224,7 @@ public class Server {
 			//Each backend needs to create its own threadsafe queue in addition to others
 			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
-			Server.AppOpsImpl to_mid = new Server.AppOpsImpl();
+			AppOpsImpl to_mid = new AppOpsImpl();
 			Naming.rebind("//localhost:" + port + "/Cloud", to_mid);
 
 			while (true) {
@@ -259,7 +259,6 @@ public class Server {
 
 	//Interface for function provided to frontend to access backend
 	public interface AppOps extends Remote {
-
 		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
 		int getLength() throws RemoteException;
 		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
