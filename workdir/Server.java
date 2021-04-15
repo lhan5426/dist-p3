@@ -1,7 +1,3 @@
-//import java.io.Serializable;
-//import java.rmi.Remote;
-//import java.rmi.RemoteException;
-//import java.rmi.server.UnicastRemoteObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
@@ -17,7 +13,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class Server {
 
-	private static AppOps from_front;
+	private static AppOps from_front = null;
 
 	public static int[] hardcoded = new int[]{
 		3,2,2,2,
@@ -122,6 +118,7 @@ public class Server {
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
 		// convert strings
+		AppOps temp = null;
 		int ipaddy = -1;
 		int port = -1;
 		int id = -1;
@@ -207,10 +204,11 @@ public class Server {
 			//  : i think you need to wait until some signal is sent from app server indicating it's up
 			// this also needs to be outside the class and is prolly some serializable
 			try {
-				from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+				temp = (AppOps)Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
+				from_front = temp;
 				SL.register_frontend();
 				while (true) {
 					Cloud.FrontEndOps.Request r = SL.getNextRequest();
