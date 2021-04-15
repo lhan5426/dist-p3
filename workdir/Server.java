@@ -53,10 +53,10 @@ public class Server {
 			14,11,11,10
 	};
 
-	private static class AppQueue extends UnicastRemoteObject implements Server.AppOps {
+	private static class AppOpsImpl extends UnicastRemoteObject implements Server.AppOps {
 		private ArrayBlockingQueue<Cloud.FrontEndOps.Request> jobs = new ArrayBlockingQueue<Cloud.FrontEndOps.Request>(5);
 
-		public AppQueue() throws RemoteException {
+		public AppOpsImpl() throws RemoteException {
 			super(0);
 		}
 
@@ -226,7 +226,7 @@ public class Server {
 			//Each backend needs to create its own threadsafe queue in addition to others
 			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
-			AppQueue to_mid = new Server.AppQueue();
+			AppOpsImpl to_mid = new Server.AppOpsImpl();
 			Naming.rebind("//localhost:" + port + "/Cloud", to_mid);
 
 			while (true) {
