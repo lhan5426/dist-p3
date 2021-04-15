@@ -221,6 +221,10 @@ public class Server {
 						// if job is taking a long time and this put never happens
 						// may need some form of timing benchmark to decide when to drop job
 						from_front.queueRequest(r);
+						Cloud.FrontEndOps.Request r0 = to_mid.getHead();
+						if (r0 != null) {
+							logger.info(timestamp_log("From frontend pov, correctly stored req" + r0.toString() + "\n"));
+						}
 						//somehow do some RMI shit and send
 						logger.info("Frontend should be queueing shit here\n");
 					}
@@ -240,7 +244,7 @@ public class Server {
 			while (true) {
 				Cloud.FrontEndOps.Request r0 = to_mid.getHead();
 				while (r0 == null) {
-					logger.info(timestamp_log("currently waiting for req to come in\n"));
+					//logger.info(timestamp_log("currently waiting for req to come in\n"));
 				}
 				logger.info("\tcurrent req: " + r0.toString() + "\n");
 				Cloud.FrontEndOps.Request r = to_mid.removeHead();
