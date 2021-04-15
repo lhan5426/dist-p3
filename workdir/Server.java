@@ -35,7 +35,7 @@ public class Server {
 	};
 
 	//Interface for function provided to frontend to access backend
-	private interface AppOps extends remote {
+	private interface AppOps extends Remote {
 		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
 		private int getLength() throws RemoteException;
 		private Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
@@ -216,7 +216,7 @@ public class Server {
 			Naming.rebind("//localhost:" + port + "/Cloud", to_mid);
 
 			while (true) {
-				Cloud.FrontEndOps.Request r = AppQueue.removeHead();
+				Cloud.FrontEndOps.Request r = to_mid.removeHead();
 				SL.processRequest(r);
 			}
 		}
