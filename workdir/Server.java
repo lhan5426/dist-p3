@@ -133,7 +133,7 @@ public class Server {
 			while (SL.getTime() < 10) {
 				SL.register_frontend();
 				Cloud.FrontEndOps.Request r = SL.getNextRequest();
-				last_times.add_ele(SL.getTime());
+				last_times.add(SL.getTime());
 				/*
 				if (get_avg(last_times, endind) > 1) {
 					SL.startVM();
@@ -156,23 +156,27 @@ public class Server {
 			SL.register_frontend();
 			while (true) {
 				Cloud.FrontEndOps.Request r = SL.getNextRequest();
-				SL.queueRequest(r);
+				Cloud.FrontEndOps.queueRequest(r);
 				//somehow do some RMI shit and send
 			}
+		//app server
 		} else {
+			// the size of Q needs to be fine tuned probably
+			ArrayBlockingQueue<Float> last_times = new ArrayBlockingQueue<Float>(5);
+			//Each backend needs to create its own threadsafe queue in addition to others
+			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
 			SL.processRequest(r);
 		}
 
-		// odd VM -  we will use as front tier server + middle combined for now
-
+		/*
 		while (true) {
 			SL.register_frontend();
 			Cloud.FrontEndOps.Request r = SL.getNextRequest();
 			SL.unregister_frontend();
 			SL.processRequest(r);
 		}
-
+		 */
 
 		/*
 		// register with load balancer so requests are sent to this server
