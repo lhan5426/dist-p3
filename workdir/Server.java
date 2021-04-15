@@ -30,6 +30,52 @@ public class Server {
 		14,11,11,10
 	};
 
+	//Interface for function provided to frontend to access backend
+	private interface AppOps extends remote {
+		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
+		private synchronized int getLength() throws RemoteException;
+		private synchronized Request removeHead() throws InterruptedException, RemoteException;
+	}
+
+	private class AppQueue extends UnicastRemoteObject implements Server.AppOps {
+		private ArrayBlockingQueue<Cloud.FrontEndOps.Request> jobs = new ArrayBlockingQueue<Cloud.FrontEndOps.Request>(5);
+
+		public AppQueue() throws RemoteException {
+			super(0);
+		}
+
+		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException {
+			try {
+				this.notifyAll();
+				this.jobs.add(var1);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private synchronized int getLength() {
+			try {
+				return this.jobs.size();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private synchronized Request removeHead() {
+			Request r = null;
+
+			try {
+				r = (Request)this.jobs.take();
+			}
+			catch (InterruptedException e1) {
+				e1.printStackTrace();
+			} catch (RemoteException e2) {
+				e2.printStackTrace();
+			}
+			return r;
+		}
+	}
+
 	public static String timestamp_log(String s) throws Exception {
 		try {
 			Instant instant = Instant.now();
@@ -41,15 +87,6 @@ public class Server {
 		return "Failed to convert";
 	}
 
-//	public int get_avg(ArrayList<Integer> times, int endind) {
-//		if (endind == 0) return times.get(0);
-//		int sum = 0;
-//		int stind = max(0, endind-4);
-//		int endind = min(times.size(), 5);
-//		for (int t = stind; t < endind; t--)
-//			sum += times.get(t);
-//		return sum/(endind-stind);
-//	}
 
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
@@ -151,22 +188,33 @@ public class Server {
 		//bool qlong = false;
 
 		int num_front = ((int) Math.floor(hardcoded[(int) SL.getTime()]/2))+1;
+
 		//front end designated
 		if (id > 1 && id < num_front+1) {
+			// the size of Q needs to be fine tuned probably
+			// TODO figure out what args[0] is and change it to less magic
+			// TODO error handling for this casting
+			AppQueue from_front = (AppQueue) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
 			SL.register_frontend();
 			while (true) {
 				Cloud.FrontEndOps.Request r = SL.getNextRequest();
-				Cloud.FrontEndOps.queueRequest(r);
+				// if job is taking a long time and this put never happens
+				// may need some form of timing benchmark to decide when to drop job
+				from_front.queueRequest(r);
 				//somehow do some RMI shit and send
 			}
 		//app server
 		} else {
-			// the size of Q needs to be fine tuned probably
-			ArrayBlockingQueue<Float> last_times = new ArrayBlockingQueue<Float>(5);
 			//Each backend needs to create its own threadsafe queue in addition to others
 			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
-			SL.processRequest(r);
+			AppQueue to_mid = new AppQueue;
+			Naming.rebind("//localhost:" + port + "/Cloud", to_mid);
+
+			while (true) {
+				Cloud.FrontEndOps.Request r = AppQueue.removeHead();
+				SL.processRequest(r);
+			}
 		}
 
 		/*
