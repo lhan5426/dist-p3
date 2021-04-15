@@ -244,7 +244,8 @@ public class Server {
 			while (true) {
 				Cloud.FrontEndOps.Request r0 = to_mid.getHead();
 				while (r0 == null) {
-					//logger.info(timestamp_log("currently waiting for req to come in\n"));
+					logger.info(timestamp_log("currently waiting for req to come in\n"));
+					r0 = to_mid.getHead();
 				}
 				logger.info("\tcurrent req: " + r0.toString() + "\n");
 				Cloud.FrontEndOps.Request r = to_mid.removeHead();
