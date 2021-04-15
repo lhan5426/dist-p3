@@ -49,21 +49,13 @@ public class Server {
 		}
 
 		public boolean queueRequest(Cloud.FrontEndOps.Request var1) {
-			try {
-				this.notifyAll();
-				this.jobs.add(var1);
-				return true;
-			} else {
-				return false;
-			}
+			this.notifyAll();
+			this.jobs.add(var1);
+			return true;
 		}
 
 		public int getLength() {
-			try {
-				return this.jobs.size();
-			} else {
-				return false;
-			}
+			return this.jobs.size();
 		}
 
 		public Cloud.FrontEndOps.Request removeHead() {
