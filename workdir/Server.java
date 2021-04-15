@@ -7,8 +7,12 @@ import java.io.InputStream;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
-import java.time.Instant;
-//import java.util.ArrayList;
+//import java.time.Instant;
+import java.rmi.Naming;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class Server {
@@ -62,10 +66,10 @@ public class Server {
 		}
 
 		private synchronized Request removeHead() {
-			Request r = null;
+			Cloud.FrontEndOps.Request r = null;
 
 			try {
-				r = (Request)this.jobs.take();
+				r = (Cloud.FrontEndOps.Request)this.jobs.take();
 			}
 			catch (InterruptedException e1) {
 				e1.printStackTrace();
