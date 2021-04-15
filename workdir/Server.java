@@ -80,10 +80,7 @@ public class Server {
 
 		public synchronized Cloud.FrontEndOps.Request getHead() {
 			Cloud.FrontEndOps.Request r = null;
-
-			try {
-				r = (Cloud.FrontEndOps.Request)this.jobs.peek();
-			}
+			r = (Cloud.FrontEndOps.Request)this.jobs.peek();
 			return r;
 		}
 	}
