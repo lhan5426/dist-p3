@@ -199,7 +199,7 @@ public class Server {
 //					//somehow do some RMI shit and send
 //				}
 			logger.info("dummy");
-			}
+			//}
 		//app server
 		} else {
 			//Each backend needs to create its own threadsafe queue in addition to others
