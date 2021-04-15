@@ -229,7 +229,7 @@ public class Server {
 						logger.info("Frontend should be queueing shit here\n");
 					}
 				} catch (Exception e) {
-					//e.printStackTrace();
+					e.printStackTrace();
 				}
 			}
 		//app server
@@ -284,5 +284,6 @@ public class Server {
 		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
 		Cloud.FrontEndOps.Request getHead() throws RemoteException;
 	}
+
 }
 
