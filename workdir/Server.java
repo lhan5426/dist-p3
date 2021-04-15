@@ -104,7 +104,7 @@ public class Server extends Remote {
 		int upscale_thres = 0;
 		int downscale_thres = 0;
 		// right now rolling avg is last 5 interarrival times
-		ArrayBlockingQueue<float> last_times = new ArrayBlockingQueue<float>;
+		ArrayBlockingQueue<float> last_times = new ArrayBlockingQueue<float>();
 		int endind = 0;
 		// total includes master node so technically should never be below 1
 		int curr_total = hardcoded[(int) SL.getTime()];
