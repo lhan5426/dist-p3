@@ -205,7 +205,7 @@ public class Server {
 			// this also needs to be outside the class and is prolly some serializable
 			while (temp == null) {
 				try {
-					temp = (AppOps)Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+					temp = (AppOps)Naming.lookup("//" + args[0] + ":" + port + "/AppOp");
 					from_front = temp;
 					SL.register_frontend();
 					while (true) {
@@ -225,7 +225,7 @@ public class Server {
 			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
 			AppOpsImpl to_mid = new AppOpsImpl();
-			Naming.rebind("//localhost:" + port + "/Cloud", to_mid);
+			Naming.rebind("//localhost:" + port + "/AppOp", to_mid);
 
 			while (true) {
 				Cloud.FrontEndOps.Request r = to_mid.removeHead();
