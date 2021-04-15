@@ -44,11 +44,11 @@ public class Server {
 	private class AppQueue extends UnicastRemoteObject implements Server.AppOps {
 		private ArrayBlockingQueue<Cloud.FrontEndOps.Request> jobs = new ArrayBlockingQueue<Cloud.FrontEndOps.Request>(5);
 
-		public AppQueue() throws RemoteException {
+		private AppQueue() throws RemoteException {
 			super(0);
 		}
 
-		public boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException {
+		private boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException {
 			try {
 				this.notifyAll();
 				this.jobs.add(var1);
@@ -57,7 +57,7 @@ public class Server {
 			}
 		}
 
-		public int getLength() {
+		private int getLength() {
 			try {
 				return this.jobs.size();
 			} catch (RemoteException e) {
@@ -65,7 +65,7 @@ public class Server {
 			}
 		}
 
-		public Cloud.FrontEndOps.Request removeHead() {
+		private Cloud.FrontEndOps.Request removeHead() {
 			Cloud.FrontEndOps.Request r = null;
 
 			try {
