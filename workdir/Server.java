@@ -165,7 +165,7 @@ public class Server {
 			while (SL.getTime() < 10) {
 				SL.register_frontend();
 				Cloud.FrontEndOps.Request r = SL.getNextRequest();
-				last_times.add(SL.getTime());
+				//last_times.add(SL.getTime());
 				/*
 				if (get_avg(last_times, endind) > 1) {
 					SL.startVM();
