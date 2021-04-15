@@ -184,17 +184,18 @@ public class Server {
 			// TODO args[0] to ipaddy (may need to render args[0] a string)
 			// TODO error handling for this casting
 			try {
-				AppOps from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+				private static AppOps from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-			SL.register_frontend();
-			while (true) {
-				Cloud.FrontEndOps.Request r = SL.getNextRequest();
-				// if job is taking a long time and this put never happens
-				// may need some form of timing benchmark to decide when to drop job
-				from_front.queueRequest(r);
-				//somehow do some RMI shit and send
+			} finally {
+				SL.register_frontend();
+				while (true) {
+					Cloud.FrontEndOps.Request r = SL.getNextRequest();
+					// if job is taking a long time and this put never happens
+					// may need some form of timing benchmark to decide when to drop job
+					from_front.queueRequest(r);
+					//somehow do some RMI shit and send
+				}
 			}
 		//app server
 		} else {
