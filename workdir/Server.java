@@ -84,9 +84,6 @@ public class Server {
 			try {
 				r = (Cloud.FrontEndOps.Request)this.jobs.peek();
 			}
-			catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
 			return r;
 		}
 	}
@@ -281,7 +278,7 @@ public class Server {
 		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
 		int getLength() throws RemoteException;
 		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
-		Cloud.FrontEndOps.Request getHead() throws InterruptedException, RemoteException;
+		Cloud.FrontEndOps.Request getHead() throws RemoteException;
 	}
 }
 
