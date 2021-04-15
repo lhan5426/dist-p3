@@ -94,24 +94,24 @@ public class Server {
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
 
-//		String logname = String.join("-", args);
-//		Logger logger = Logger.getLogger(logname);
-//		FileHandler fh;
-//
-//		try {
-//			// This block configure the logger with handler and formatter
-//			fh = new FileHandler("/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/workdir/logs/" + logname);
-//			logger.addHandler(fh);
-//			SimpleFormatter formatter = new SimpleFormatter();
-//			fh.setFormatter(formatter);
-//
-//			logger.info("----------------Init logs---------------\n");
-//
-//		} catch (SecurityException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		String logname = String.join("-", args);
+		Logger logger = Logger.getLogger(logname);
+		FileHandler fh;
+
+		try {
+			// This block configure the logger with handler and formatter
+			fh = new FileHandler("/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/workdir/logs/" + logname);
+			logger.addHandler(fh);
+			SimpleFormatter formatter = new SimpleFormatter();
+			fh.setFormatter(formatter);
+
+			logger.info("----------------Init logs---------------\n");
+
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 
 
@@ -230,6 +230,7 @@ public class Server {
 			while (true) {
 				Cloud.FrontEndOps.Request r = to_mid.removeHead();
 				SL.processRequest(r);
+				logger.info("completed req: " + r.toString());
 			}
 		}
 
