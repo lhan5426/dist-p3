@@ -203,21 +203,25 @@ public class Server {
 			// TODO RNSDNFOSDNF
 			//  : i think you need to wait until some signal is sent from app server indicating it's up
 			// this also needs to be outside the class and is prolly some serializable
-			try {
-				temp = (AppOps)Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				from_front = temp;
-				SL.register_frontend();
-				while (true) {
-					Cloud.FrontEndOps.Request r = SL.getNextRequest();
-					// if job is taking a long time and this put never happens
-					// may need some form of timing benchmark to decide when to drop job
-					from_front.queueRequest(r);
-					//somehow do some RMI shit and send
+			while (temp == null) {
+				try {
+					temp = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (temp != null) {
+						from_front = temp;
+						SL.register_frontend();
+						while (true) {
+							Cloud.FrontEndOps.Request r = SL.getNextRequest();
+							// if job is taking a long time and this put never happens
+							// may need some form of timing benchmark to decide when to drop job
+							from_front.queueRequest(r);
+							//somehow do some RMI shit and send
+						}
+					}
+					//logger.info("dummy");
 				}
-			//logger.info("dummy");
 			}
 		//app server
 		} else {
