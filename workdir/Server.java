@@ -20,7 +20,7 @@ public class Server {
 	private static AppOps from_front = null;
 
 	public static int[] hardcoded = new int[]{
-		5,3,3,3,
+		3,3,3,3,
 		3,3,2,8,
 		4,10,10,10,
 		10,10,10,7,
@@ -34,6 +34,23 @@ public class Server {
 			// exp has 3 5 for 22, may want to bump up to 11
 			// last one is 2 2 for normal
 		14,11,11,10
+	};
+
+	public static int[] bardcoded = new int[]{
+			1,3,3,3,
+			3,3,2,8,
+			4,10,10,10,
+			10,10,10,7,
+			// 10 may be okay for hour 19
+			10,10,10,5,
+			//try 10 to see if less timeouts
+			// 13 12 10 10 originally
+			// 1: failed 5 timeout 1 - 11 orig
+			// 2: failed 1 timeout 6 - 12 orig
+
+			// exp has 3 5 for 22, may want to bump up to 11
+			// last one is 2 2 for normal
+			14,11,11,10
 	};
 
 	private static class AppQueue extends UnicastRemoteObject implements Server.AppOps {
@@ -81,24 +98,24 @@ public class Server {
 	public static void main ( String args[] ) throws Exception {
 		//Filehandler setup; Based on SO link: https://tinyurl.com/wnr73bnh
 
-		String logname = String.join("-", args);
-		Logger logger = Logger.getLogger(logname);
-		FileHandler fh;
-
-		try {
-			// This block configure the logger with handler and formatter
-			fh = new FileHandler("/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/workdir/logs/" + logname);
-			logger.addHandler(fh);
-			SimpleFormatter formatter = new SimpleFormatter();
-			fh.setFormatter(formatter);
-
-			logger.info("----------------Init logs---------------\n");
-
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		String logname = String.join("-", args);
+//		Logger logger = Logger.getLogger(logname);
+//		FileHandler fh;
+//
+//		try {
+//			// This block configure the logger with handler and formatter
+//			fh = new FileHandler("/afs/andrew.cmu.edu/usr2/lawrench/private/440/15440-p3/workdir/logs/" + logname);
+//			logger.addHandler(fh);
+//			SimpleFormatter formatter = new SimpleFormatter();
+//			fh.setFormatter(formatter);
+//
+//			logger.info("----------------Init logs---------------\n");
+//
+//		} catch (SecurityException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 
 
@@ -120,23 +137,21 @@ public class Server {
 			e.printStackTrace();
 		}
 
-		logger.info("IP: " + args[0]);
-		logger.info("Port: " + args[1]);
-		logger.info("ID: " + args[2]);
-
-		logger.info("Stored Port: " + String.valueOf(port));
-		logger.info("ID: " + String.valueOf(id));
+//		logger.info("IP: " + args[0]);
+//		logger.info("Port: " + args[1]);
+//		logger.info("ID: " + args[2]);
+//
+//		logger.info("Stored Port: " + String.valueOf(port));
+//		logger.info("ID: " + String.valueOf(id));
 
 		ServerLib SL = new ServerLib( args[0], port );
 		int upscale_thres = 0;
 		int downscale_thres = 0;
-		// right now rolling avg is last 5 interarrival times
-		//ArrayBlockingQueue<Float> last_times = new ArrayBlockingQueue<Float>(5);
-		int endind = 0;
+		int endind = curr_total;
 		// total includes master node so technically should never be below 1
 		int curr_total = hardcoded[(int) SL.getTime()];
-		logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
-		logger.info("ind: " + String.valueOf((int) SL.getTime()));
+//		logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
+//		logger.info("ind: " + String.valueOf((int) SL.getTime()));
 
 		//designated master node, started required # of VMs
 		//can temporarily act as monolith and handle queued requests
@@ -147,6 +162,7 @@ public class Server {
 				SL.startVM();
 			}
 
+			//TODO: fix/include early dropout
 			int qextras = SL.getQueueLength();
 			/*
 			while (qextras > 2) {
@@ -169,7 +185,7 @@ public class Server {
 
 				 */
 				SL.unregister_frontend();
-				//SL.processRequest(r);
+				SL.processRequest(r);
 			}
 		}
 		//TODO measure interarrival times;
@@ -178,28 +194,30 @@ public class Server {
 		//this server is not keeping up
 		//bool qlong = false;
 
-		int num_front = 2; //((int) Math.floor(hardcoded[(int) SL.getTime()]/2))+1;
+		int num_front = ((int) Math.floor(bardcoded[(int) SL.getTime()]));
 
 		//front end designated
-		if (id > 1 && id < num_front+1) {
+		//must be at least 0 and 1 VM that are non front
+		//so this should always be safe
+		if (id > 1 && id < num_front+2) {
 			// the size of Q needs to be fine tuned probably
 			// TODO args[0] to ipaddy (may need to render args[0] a string)
 			// TODO error handling for this casting
-//			try {
-//				from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			} finally {
-//				SL.register_frontend();
-//				while (true) {
-//					Cloud.FrontEndOps.Request r = SL.getNextRequest();
-//					// if job is taking a long time and this put never happens
-//					// may need some form of timing benchmark to decide when to drop job
-//					from_front.queueRequest(r);
-//					//somehow do some RMI shit and send
-//				}
-			logger.info("dummy");
-			//}
+			try {
+				from_front = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				SL.register_frontend();
+				while (true) {
+					Cloud.FrontEndOps.Request r = SL.getNextRequest();
+					// if job is taking a long time and this put never happens
+					// may need some form of timing benchmark to decide when to drop job
+					from_front.queueRequest(r);
+					//somehow do some RMI shit and send
+				}
+			//logger.info("dummy");
+			}
 		//app server
 		} else {
 			//Each backend needs to create its own threadsafe queue in addition to others
