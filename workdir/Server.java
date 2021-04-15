@@ -147,9 +147,9 @@ public class Server {
 		ServerLib SL = new ServerLib( args[0], port );
 		int upscale_thres = 0;
 		int downscale_thres = 0;
-		int endind = curr_total;
 		// total includes master node so technically should never be below 1
 		int curr_total = hardcoded[(int) SL.getTime()];
+		int endind = curr_total;
 //		logger.info("val: " + String.valueOf(hardcoded[(int) SL.getTime()]));
 //		logger.info("ind: " + String.valueOf((int) SL.getTime()));
 
