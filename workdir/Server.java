@@ -54,6 +54,8 @@ public class Server {
 
 		public AppOpsImpl() throws RemoteException {
 			super(0);
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
 
 		public boolean queueRequest(Cloud.FrontEndOps.Request var1) {
