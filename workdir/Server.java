@@ -49,7 +49,7 @@ public class Server {
 			14,11,11,10
 	};
 
-	private static class AppOpsImpl extends UnicastRemoteObject implements AppOps {
+	private static class AppOpsImpl extends UnicastRemoteObject implements Server.AppOps {
 		private ArrayBlockingQueue<Cloud.FrontEndOps.Request> jobs = new ArrayBlockingQueue<Cloud.FrontEndOps.Request>(5);
 
 		public AppOpsImpl() throws RemoteException {
@@ -118,7 +118,7 @@ public class Server {
 
 		if (args.length != 3) throw new Exception("Need 3 args: <cloud_ip> <cloud_port> <VM id>");
 		// convert strings
-		AppOps temp = null;
+		Server.AppOps temp = null;
 		int ipaddy = -1;
 		int port = -1;
 		int id = -1;
@@ -205,22 +205,18 @@ public class Server {
 			// this also needs to be outside the class and is prolly some serializable
 			while (temp == null) {
 				try {
-					temp = (AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+					temp = (Server.AppOps) Naming.lookup("//" + args[0] + ":" + port + "/Cloud");
+					from_front = temp;
+					SL.register_frontend();
+					while (true) {
+						Cloud.FrontEndOps.Request r = SL.getNextRequest();
+						// if job is taking a long time and this put never happens
+						// may need some form of timing benchmark to decide when to drop job
+						from_front.queueRequest(r);
+						//somehow do some RMI shit and send
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
-				} finally {
-					if (temp != null) {
-						from_front = temp;
-						SL.register_frontend();
-						while (true) {
-							Cloud.FrontEndOps.Request r = SL.getNextRequest();
-							// if job is taking a long time and this put never happens
-							// may need some form of timing benchmark to decide when to drop job
-							from_front.queueRequest(r);
-							//somehow do some RMI shit and send
-						}
-					}
-					//logger.info("dummy");
 				}
 			}
 		//app server
@@ -228,8 +224,8 @@ public class Server {
 			//Each backend needs to create its own threadsafe queue in addition to others
 			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
-			AppOpsImpl to_mid = new Server.AppOpsImpl();
-			Naming.bind("//localhost:" + port + "/Cloud", to_mid);
+			Server.AppOpsImpl to_mid = new Server.AppOpsImpl();
+			Naming.rebind("//localhost:" + port + "/Cloud", to_mid);
 
 			while (true) {
 				Cloud.FrontEndOps.Request r = to_mid.removeHead();
