@@ -11,7 +11,7 @@ import java.time.Instant;
 //import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class Server extends Remote {
+public class Server {
 
 	public static int[] hardcoded = new int[]{
 		3,3,3,3,
@@ -104,7 +104,7 @@ public class Server extends Remote {
 		int upscale_thres = 0;
 		int downscale_thres = 0;
 		// right now rolling avg is last 5 interarrival times
-		ArrayBlockingQueue<float> last_times = new ArrayBlockingQueue<float>();
+		ArrayBlockingQueue<Float> last_times = new ArrayBlockingQueue<Float>();
 		int endind = 0;
 		// total includes master node so technically should never be below 1
 		int curr_total = hardcoded[(int) SL.getTime()];
