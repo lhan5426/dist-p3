@@ -35,10 +35,10 @@ public class Server {
 	};
 
 	//Interface for function provided to frontend to access backend
-	private interface AppOps extends Remote {
+	public interface AppOps extends Remote {
 		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
-		private int getLength() throws RemoteException;
-		private Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
+		int getLength() throws RemoteException;
+		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
 	}
 
 	private class AppQueue extends UnicastRemoteObject implements Server.AppOps {
@@ -48,7 +48,7 @@ public class Server {
 			super(0);
 		}
 
-		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException {
+		public boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException {
 			try {
 				this.notifyAll();
 				this.jobs.add(var1);
@@ -57,7 +57,7 @@ public class Server {
 			}
 		}
 
-		private int getLength() {
+		public int getLength() {
 			try {
 				return this.jobs.size();
 			} catch (RemoteException e) {
@@ -65,7 +65,7 @@ public class Server {
 			}
 		}
 
-		private Cloud.FrontEndOps.Request removeHead() {
+		public Cloud.FrontEndOps.Request removeHead() {
 			Cloud.FrontEndOps.Request r = null;
 
 			try {
