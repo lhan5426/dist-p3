@@ -18,7 +18,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class Server {
 
 	public static int[] hardcoded = new int[]{
-		3,3,3,3,
+		5,3,3,3,
 		3,3,2,8,
 		4,10,10,10,
 		10,10,10,7,
@@ -162,6 +162,7 @@ public class Server {
 			 */
 			// While other VM's boot, we handle initial queued requests in master node
 			// Cannot stay in req handling mode longer than 10 seconds according to Piazza
+			// ALthough there is a big penalty for switching - ideally immediately
 			while (SL.getTime() < 10) {
 				SL.register_frontend();
 				Cloud.FrontEndOps.Request r = SL.getNextRequest();
@@ -182,7 +183,7 @@ public class Server {
 		//this server is not keeping up
 		//bool qlong = false;
 
-		int num_front = 1; //((int) Math.floor(hardcoded[(int) SL.getTime()]/2))+1;
+		int num_front = 2; //((int) Math.floor(hardcoded[(int) SL.getTime()]/2))+1;
 
 		//front end designated
 		if (id > 1 && id < num_front+1) {
