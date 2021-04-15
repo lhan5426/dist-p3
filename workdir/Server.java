@@ -34,13 +34,6 @@ public class Server {
 		14,11,11,10
 	};
 
-	//Interface for function provided to frontend to access backend
-	public interface AppOps extends Remote {
-		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
-//		int getLength() throws RemoteException;
-//		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
-	}
-
 	private static class AppQueue extends UnicastRemoteObject implements Server.AppOps {
 		private ArrayBlockingQueue<Cloud.FrontEndOps.Request> jobs = new ArrayBlockingQueue<Cloud.FrontEndOps.Request>(5);
 
@@ -238,6 +231,14 @@ public class Server {
 		}
 
 		 */
+
+	}
+
+	//Interface for function provided to frontend to access backend
+	public interface AppOps extends Remote {
+		boolean queueRequest(Cloud.FrontEndOps.Request var1) throws RemoteException;
+//		int getLength() throws RemoteException;
+//		Cloud.FrontEndOps.Request removeHead() throws InterruptedException, RemoteException;
 	}
 }
 
