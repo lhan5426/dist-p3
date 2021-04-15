@@ -44,7 +44,7 @@ public class Server {
 		}
 
 		public boolean queueRequest(Cloud.FrontEndOps.Request var1) {
-			this.notifyAll();
+			//this.notifyAll();
 			this.jobs.add(var1);
 			return true;
 		}
