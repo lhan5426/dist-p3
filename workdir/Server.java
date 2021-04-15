@@ -229,7 +229,7 @@ public class Server {
 			//Receiving rolling average from each app server may also be good
 			//Somehow get req from RMI
 			AppOpsImpl to_mid = new Server.AppOpsImpl();
-			Naming.rebind("//localhost:" + port + "/Cloud", to_mid);
+			Naming.bind("//localhost:" + port + "/Cloud", to_mid);
 
 			while (true) {
 				Cloud.FrontEndOps.Request r = to_mid.removeHead();
