@@ -171,19 +171,19 @@ public class Server {
 			// While other VM's boot, we handle initial queued requests in master node
 			// Cannot stay in req handling mode longer than 10 seconds according to Piazza
 			// ALthough there is a big penalty for switching - ideally immediately
-			while (true) {
-				SL.register_frontend();
-				Cloud.FrontEndOps.Request r = SL.getNextRequest();
-				//last_times.add(SL.getTime());
-				/*
-				if (get_avg(last_times, endind) > 1) {
-					SL.startVM();
-				}
-
-				 */
-				SL.unregister_frontend();
-				SL.processRequest(r);
-			}
+//			while (true) {
+//				SL.register_frontend();
+//				Cloud.FrontEndOps.Request r = SL.getNextRequest();
+//				//last_times.add(SL.getTime());
+//				/*
+//				if (get_avg(last_times, endind) > 1) {
+//					SL.startVM();
+//				}
+//
+//				 */
+//				SL.unregister_frontend();
+//				SL.processRequest(r);
+//			}
 		}
 		//TODO measure interarrival times;
 
