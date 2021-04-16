@@ -17,7 +17,7 @@ public class Server {
 
 	public static int[] hardcoded = new int[]{
 		3,2,2,2,
-		3,3,2,8,
+		2,2,2,8,
 		4,10,10,10,
 		10,10,10,7,
 			// 10 may be okay for hour 19
@@ -34,7 +34,7 @@ public class Server {
 
 	public static int[] bardcoded = new int[]{
 			1,1,1,1,
-			3,3,2,8,
+			1,1,2,4,
 			4,10,10,10,
 			10,10,10,7,
 			// 10 may be okay for hour 19
