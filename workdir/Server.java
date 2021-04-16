@@ -203,7 +203,7 @@ public class Server {
 		//must be at least 0 and 1 VM that are non front
 		//so this should always be safe
 		if (id > 1 && id < num_front+2) {
-			logger.info("Inside some dogshit fronted: \n");
+			logger.info("Inside  some dogshit fronted: \n");
 			// the size of Q needs to be fine tuned probably
 			// TODO args[0] to ipaddy (may need to render args[0] a string)
 			// TODO error handling for this casting
