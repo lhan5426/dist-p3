@@ -1,27 +1,27 @@
-java Cloud 15027 ../lib/db1.txt c-2000-69420 0 30 | grep "^Stats:*"
-java Cloud 15027 ../lib/db1.txt u-1000-3000-69420 0 30 | grep "^Stats:*"
-java Cloud 15027 ../lib/db1.txt u-1000-3000-1 0 30 | grep "^Stats:*"
-java Cloud 15027 ../lib/db1.txt e-2000-69420 0 30 | grep "^Stats:*"
+java Cloud 15027 ../lib/db1.txt c-2000-69420 0 30 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt u-1000-3000-69420 0 30 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt u-1000-3000-1 0 30 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt e-2000-69420 0 30 | grep "^Stats:*\|^Total VM time:*"
 
-java Cloud 15027 ../lib/db1.txt c-4000-69420 1 30
-java Cloud 15027 ../lib/db1.txt u-1750-3000-69420 1 30
-java Cloud 15027 ../lib/db1.txt e-2200-69420 1 30
+java Cloud 15027 ../lib/db1.txt c-4000-69420 1 30 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt u-1750-3000-69420 1 30 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt e-2200-69420 1 30 | grep "^Stats:*\|^Total VM time:*"
 
-java Cloud 15027 ../lib/db1.txt c-10000-69420 2 30
-java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 2 30
-java Cloud 15027 ../lib/db1.txt e-10000-69420 2 30
+java Cloud 15027 ../lib/db1.txt c-10000-69420 2 30 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 2 30 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt e-10000-69420 2 30 | grep "^Stats:*\|^Total VM time:*"
 
-java Cloud 15027 ../lib/db1.txt c-10000-69420 3 60
-java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 3 60
-java Cloud 15027 ../lib/db1.txt e-10000-69420 3 60
+java Cloud 15027 ../lib/db1.txt c-10000-69420 3 60 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt u-8000-10000-69420 3 60 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt e-10000-69420 3 60 | grep "^Stats:*\|^Total VM time:*"
 
-java Cloud 15027 ../lib/db1.txt c-3000-69420 4 60
-java Cloud 15027 ../lib/db1.txt u-3000-4000-69420 4 60
-java Cloud 15027 ../lib/db1.txt e-3000-69420 4 60
+java Cloud 15027 ../lib/db1.txt c-3000-69420 4 60 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt u-3000-4000-69420 4 60 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt e-3000-69420 4 60 | grep "^Stats:*\|^Total VM time:*"
 
-java Cloud 15027 ../lib/db1.txt c-3000-69420 5 60
-java Cloud 15027 ../lib/db1.txt u-2000-3000-69420 5 60
-java Cloud 15027 ../lib/db1.txt e-3000-69420 5 60
+java Cloud 15027 ../lib/db1.txt c-3000-69420 5 60 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt u-2000-3000-69420 5 60 | grep "^Stats:*\|^Total VM time:*"
+java Cloud 15027 ../lib/db1.txt e-3000-69420 5 60 | grep "^Stats:*\|^Total VM time:*"
 
 
 #java Cloud 15027 ../lib/db1.txt u-2000-3000-69420 6 60
